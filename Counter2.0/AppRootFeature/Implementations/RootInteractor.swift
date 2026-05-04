@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+protocol AppRootInteractor: AnyObject {
+   func checkLoginStatus()
+}
+
 class RootInteractor: AppRootInteractor {
 
     private let presenter: AppRootPresenter

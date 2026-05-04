@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+protocol AppRootPresenter: AnyObject {
+    func isUserLogged(isLogged: Bool)
+}
+
 class RootPresenter: AppRootPresenter {
     private let view: AppRootViewController
 

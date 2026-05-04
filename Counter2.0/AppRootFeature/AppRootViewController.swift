@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AppRootViewController: UIViewController {
+final class AppRootViewController: BaseController {
 
     var interactor: AppRootInteractor?
     var router: AppRootRouter?
@@ -20,10 +20,19 @@ final class AppRootViewController: UIViewController {
     }
 
     func isUserLogged(isLogged: Bool) {
-        if isLogged {
-            router?.navigateToAuthoried(parent: self.navigationController!)
-        } else {
-            router?.navigateToLogin(parent: self.navigationController!)
+        guard let navigationController else {
+            showError("NavigationController отсутствует")
+            return
+        }
+
+        do {
+            if isLogged {
+                try router?.navigateToAuthoried(parent: navigationController)
+            } else {
+                try router?.navigateToLogin(parent: navigationController)
+            }
+        } catch {
+            showError(error.localizedDescription)
         }
     }
 }

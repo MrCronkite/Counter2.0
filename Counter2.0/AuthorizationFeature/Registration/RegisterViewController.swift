@@ -1,14 +1,13 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Counter2.0
 //
 //  Created by Влад Шимченко on 4.05.26.
 //
 
 import UIKit
-import SnapKit
 
-final class LoginViewController: UIViewController {
+final class RegisterViewController: BaseController {
 
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -44,9 +43,9 @@ final class LoginViewController: UIViewController {
         return tf
     }()
 
-    private let loginButton: UIButton = {
+    private let registerButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Log In", for: .normal)
+        btn.setTitle("Register", for: .normal)
         btn.backgroundColor = .systemBlue
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 10
@@ -54,33 +53,38 @@ final class LoginViewController: UIViewController {
         return btn
     }()
 
-    private let registerButton: UIButton = {
+    private let backButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Register", for: .normal)
+        btn.setTitle("Back", for: .normal)
         btn.backgroundColor = .clear
         btn.setTitleColor(.systemBlue, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         return btn
     }()
 
+    var router: AuthRouter?
+    //var interactor: RegisterInteractor?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupActions()
     }
+
 }
 
-extension LoginViewController {
+extension RegisterViewController {
+
     private func setupUI() {
         view.backgroundColor = .white
-        
+
         [
             loginLabel,
             loginTextField,
             passwordLabel,
             passwordTextField,
-            loginButton,
+            backButton,
             registerButton
         ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,24 +113,28 @@ extension LoginViewController {
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             passwordTextField.heightAnchor.constraint(equalToConstant: 44),
 
-            // Login Button
-            loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-
             // Register Button
-            registerButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -10),
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            registerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            registerButton.heightAnchor.constraint(equalToConstant: 50),
+
+            // Back Button
+            backButton.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -10),
+            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupActions() {
         registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
     }
 
     @objc private func didTapRegister() {
         print("Register")
     }
-}
 
+    @objc private func didTapBack() {
+        router?.backToLogin(view: self)
+    }
+}
