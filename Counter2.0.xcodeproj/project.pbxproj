@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84382C882FA868D0005F216E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 84382C872FA868D0005F216E /* Swinject */; };
+		84E09F3B2FA8D54E00B7C4BA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84E09F3A2FA8D54E00B7C4BA /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84382C882FA868D0005F216E /* Swinject in Frameworks */,
+				84E09F3B2FA8D54E00B7C4BA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = Counter2.0;
 			packageProductDependencies = (
 				84382C872FA868D0005F216E /* Swinject */,
+				84E09F3A2FA8D54E00B7C4BA /* SnapKit */,
 			);
 			productName = Counter2.0;
 			productReference = 843699682FA8605400AE0EE2 /* Counter2.0.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84382C862FA868D0005F216E /* XCRemoteSwiftPackageReference "Swinject" */,
+				84E09F392FA8D54E00B7C4BA /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 843699692FA8605400AE0EE2 /* Products */;
@@ -366,6 +370,14 @@
 				minimumVersion = 2.10.0;
 			};
 		};
+		84E09F392FA8D54E00B7C4BA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -373,6 +385,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84382C862FA868D0005F216E /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		84E09F3A2FA8D54E00B7C4BA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84E09F392FA8D54E00B7C4BA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,12 +6,127 @@
 //
 
 import UIKit
+import SnapKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
+
+    private let loginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Login"
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .darkGray
+        return label
+    }()
+
+    private let loginTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Enter login"
+        tf.borderStyle = .roundedRect
+        tf.autocapitalizationType = .none
+        tf.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        return tf
+    }()
+
+    private let passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Password"
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .darkGray
+        return label
+    }()
+
+    private let passwordTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Enter password"
+        tf.borderStyle = .roundedRect
+        tf.isSecureTextEntry = true
+        tf.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        return tf
+    }()
+
+    private let loginButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Log In", for: .normal)
+        btn.backgroundColor = .systemBlue
+        btn.setTitleColor(.white, for: .normal)
+        btn.layer.cornerRadius = 10
+        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        return btn
+    }()
+
+    private let registerButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Register", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .gray
+        setupUI()
+        setupActions()
     }
 }
+
+extension LoginViewController {
+    private func setupUI() {
+        view.backgroundColor = .white
+        
+        [
+            loginLabel,
+            loginTextField,
+            passwordLabel,
+            passwordTextField,
+            loginButton,
+            registerButton
+        ].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+
+        NSLayoutConstraint.activate([
+
+            // Login Label
+            loginLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+
+            // Login TextField
+            loginTextField.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 8),
+            loginTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            loginTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            loginTextField.heightAnchor.constraint(equalToConstant: 44),
+
+            // Password Label
+            passwordLabel.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 20),
+            passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+
+            // Password TextField
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 8),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 44),
+
+            // Login Button
+            loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+
+            // Register Button
+            registerButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -10),
+            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    private func setupActions() {
+        registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
+    }
+
+    @objc private func didTapRegister() {
+        print("Register")
+    }
+}
+
