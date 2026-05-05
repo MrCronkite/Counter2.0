@@ -63,7 +63,7 @@ final class RegisterViewController: BaseController {
     }()
 
     var router: AuthRouter?
-    //var interactor: RegisterInteractor?
+    var interactor: RegisterInteractor?
 
     override func viewDidLoad() {
         super.viewDidLoad()

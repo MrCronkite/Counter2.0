@@ -10,6 +10,7 @@ import Swinject
 
 protocol AuthRouter: AnyObject {
     func goToRegister(parent: UINavigationController) throws
+    func goToMain(parent: UINavigationController) throws
     func backToLogin(view: BaseController)
 }
 
@@ -26,6 +27,16 @@ final class AuthRouterImpl: AuthRouter {
 
         let controller = RegisterViewController()
         try authConfigurator.configure(view: controller)
+
+        parent.pushViewController(controller, animated: true)
+    }
+
+    func goToMain(parent: UINavigationController) throws {
+        guard let mainConfigurator = resolver.resolve(MainConfigurator.self)
+        else { throw DIErrors.unableToResolve }
+
+        let controller = MainViewController()
+        try mainConfigurator.configure(view: controller)
 
         parent.pushViewController(controller, animated: true)
     }

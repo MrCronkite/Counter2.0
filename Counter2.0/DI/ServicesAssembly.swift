@@ -17,5 +17,9 @@ class ServicesAssembly: Assembly {
         container.register(LocalStorageService.self, name: "always_logged") { _ in
             AlwaysLoggedInService()
         }
+
+        container.register(NetworkServices.self) { _ in
+            NetworkServicesImpl()
+        }
     }
 }

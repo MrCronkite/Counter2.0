@@ -161,7 +161,13 @@ extension LoginViewController {
 
     @objc
     private func didTapLogin() {
-        print("logIn")
+        guard let navParent = navigationController else { return }
+
+        do {
+          try router?.goToMain(parent: navParent)
+        } catch {
+          showError("DIError")
+        }
     }
 
     @objc

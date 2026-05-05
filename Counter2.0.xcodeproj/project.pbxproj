@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		84382C882FA868D0005F216E /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 84382C872FA868D0005F216E /* Swinject */; };
 		84E09F3B2FA8D54E00B7C4BA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84E09F3A2FA8D54E00B7C4BA /* SnapKit */; };
+		84E09F6E2FAA06A200B7C4BA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 84E09F6D2FAA06A200B7C4BA /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E09F6E2FAA06A200B7C4BA /* Kingfisher in Frameworks */,
 				84382C882FA868D0005F216E /* Swinject in Frameworks */,
 				84E09F3B2FA8D54E00B7C4BA /* SnapKit in Frameworks */,
 			);
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				84382C872FA868D0005F216E /* Swinject */,
 				84E09F3A2FA8D54E00B7C4BA /* SnapKit */,
+				84E09F6D2FAA06A200B7C4BA /* Kingfisher */,
 			);
 			productName = Counter2.0;
 			productReference = 843699682FA8605400AE0EE2 /* Counter2.0.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				84382C862FA868D0005F216E /* XCRemoteSwiftPackageReference "Swinject" */,
 				84E09F392FA8D54E00B7C4BA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				84E09F6C2FAA06A200B7C4BA /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 843699692FA8605400AE0EE2 /* Products */;
@@ -378,6 +382,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		84E09F6C2FAA06A200B7C4BA /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -390,6 +402,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84E09F392FA8D54E00B7C4BA /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		84E09F6D2FAA06A200B7C4BA /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84E09F6C2FAA06A200B7C4BA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
