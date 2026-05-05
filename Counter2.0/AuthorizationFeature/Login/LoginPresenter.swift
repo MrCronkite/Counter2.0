@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginPresenter: AnyObject {
-
+    func setLoginEnabled(_ isEnabled: Bool)
 }
 
 class LoginPresenterImpl: LoginPresenter {
@@ -19,4 +19,8 @@ class LoginPresenterImpl: LoginPresenter {
         self.view = view
     }
 
+
+    func setLoginEnabled(_ isEnabled: Bool) {
+        view.setloginEnabled(isEnabled)
+    }
 }

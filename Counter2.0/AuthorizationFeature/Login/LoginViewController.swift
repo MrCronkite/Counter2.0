@@ -49,6 +49,7 @@ final class LoginViewController: BaseController {
         btn.setTitle("Log In", for: .normal)
         btn.backgroundColor = .systemBlue
         btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
         btn.layer.cornerRadius = 10
         btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         return btn
@@ -57,8 +58,10 @@ final class LoginViewController: BaseController {
     private let registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Register", for: .normal)
-        btn.backgroundColor = .clear
-        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.backgroundColor = .systemBlue
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
+        btn.layer.cornerRadius = 10
         btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         return btn
     }()
@@ -71,6 +74,14 @@ final class LoginViewController: BaseController {
 
         setupUI()
         setupActions()
+    }
+
+    func setloginEnabled(_ isEnabled: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.loginButton.isEnabled = isEnabled
+            self.registerButton.isEnabled = isEnabled
+        }
     }
 }
 
@@ -120,15 +131,25 @@ extension LoginViewController {
 
             // Register Button
             registerButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -10),
-            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            registerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            registerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            registerButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+
+        loginButton.isEnabled = false
+        registerButton.isEnabled = false
     }
 
     private func setupActions() {
         registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
+
+        loginTextField.addTarget(self, action: #selector(loginDidchange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(passwordDidchange), for: .editingChanged)
     }
 
-    @objc private func didTapRegister() {
+    @objc
+    private func didTapRegister() {
         guard let navParent = navigationController else { return }
 
         do {
@@ -136,6 +157,21 @@ extension LoginViewController {
         } catch {
           showError("DIError")
         }
+    }
+
+    @objc
+    private func didTapLogin() {
+        print("logIn")
+    }
+
+    @objc
+    private func loginDidchange(_ textField: UITextField) {
+        interactor?.updateLogin(textField.text ?? "")
+    }
+
+    @objc
+    private func passwordDidchange(_ textField: UITextField) {
+        interactor?.updatePassword(textField.text ?? "")
     }
 }
 
