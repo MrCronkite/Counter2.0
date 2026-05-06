@@ -8,8 +8,6 @@
 import Foundation
 
 protocol MainInteractor: AnyObject {
-    var coins: [Coin] { get set }
-    
     func getCoinsData()
 }
 
@@ -17,8 +15,6 @@ final class MainInteractorImpl: MainInteractor {
 
     private let presenter: MainPresenter
     private let networkServie: NetworkServices
-
-    var coins: [Coin] = []
 
     init(
         presenter: MainPresenter,
@@ -33,8 +29,7 @@ final class MainInteractorImpl: MainInteractor {
         Task {
             do {
                 let coins = try await networkServie.getCoinsData()
-                self.coins = coins
-                presenter.reloadingData()
+                presenter.reloadingData(coins)
             } catch {
                 print("error")
             }

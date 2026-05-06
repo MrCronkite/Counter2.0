@@ -9,18 +9,23 @@ import Foundation
 
 
 protocol MainPresenter: AnyObject {
-    func reloadingData()
+    func reloadingData(_ coins: Coins)
 }
 
 final class MainPresenterImpl: MainPresenter {
 
     private var view: MainViewController
 
+    private var coins: Coins = []
+
     init(view: MainViewController) {
         self.view = view
     }
 
-    func reloadingData() {
-        self.view.updateView()
+    func reloadingData(_ coins: Coins) {
+        let sortedCoins = coins.sorted {
+            ($0.priceChange24h ?? 0) > ($1.priceChange24h ?? 0)
+        }
+        self.view.updateView(sortedCoins)
     }
 }

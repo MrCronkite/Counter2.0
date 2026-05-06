@@ -120,8 +120,9 @@ final class CoinCell: UITableViewCell {
             rightStack.centerYAnchor.constraint(equalTo: container.centerYAnchor)
         ])
     }
+    
     func configure(with coin: Coin) {
-        nameLabel.text = coin.name
+        nameLabel.text = coin.name.firstWords(3)
         symbolLabel.text = coin.symbol.uppercased()
         priceLabel.text = "$\(coin.currentPrice)"
 
@@ -131,5 +132,15 @@ final class CoinCell: UITableViewCell {
         }
 
         coinImageView.kf.setImage(with: URL(string: coin.image))
+    }
+}
+
+extension String {
+    func firstWords(_ count: Int) -> String {
+        guard count > 0 else { return "" }
+        return self
+            .split(whereSeparator: { $0.isWhitespace })
+            .prefix(count)
+            .joined(separator: " ")
     }
 }

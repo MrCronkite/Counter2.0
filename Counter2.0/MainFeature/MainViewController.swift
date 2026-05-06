@@ -14,6 +14,8 @@ class MainViewController: BaseController {
     var interactor: MainInteractor?
     var router: MainRouter?
 
+    private var coins: [Coin] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +28,8 @@ class MainViewController: BaseController {
         startLoading()
     }
 
-    func updateView() {
+    func updateView(_ coins: Coins) {
+        self.coins = coins
         stopLoading()
         tableView.reloadData()
     }
@@ -52,7 +55,7 @@ class MainViewController: BaseController {
 extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        interactor?.coins.count ?? 0
+        coins.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,8 +63,7 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: CoinCell.id,
             for: indexPath
-        ) as? CoinCell,
-              let coins = interactor?.coins
+        ) as? CoinCell
         else {
             return UITableViewCell()
         }
